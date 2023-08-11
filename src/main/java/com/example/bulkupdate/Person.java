@@ -1,17 +1,18 @@
 package com.example.bulkupdate;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "PERSON", indexes = {
-        @Index(name = "idx_person_id_first_name", columnList = "id, first_name, last_name, email, gender")
+        @Index(name = "idx_all_columns", columnList = "id, first_name, last_name, email, gender")
+}, uniqueConstraints = {
+        @UniqueConstraint(name = "uc_person_id", columnNames = {"id"})
 })
-@Data
 @NoArgsConstructor
+@Getter
+@Setter
 @AllArgsConstructor
 public class Person {
 
@@ -27,7 +28,4 @@ public class Person {
     private String lastName;
     private String email;
     private String gender;
-
-//    @OneToOne(mappedBy = "person")
-//    private Address address;
 }
